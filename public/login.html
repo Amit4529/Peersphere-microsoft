@@ -362,6 +362,8 @@
                 const data = await response.json();
 
                 if (response.ok) {
+                    // Store user data in sessionStorage(only one line after this)
+                    sessionStorage.setItem("user", JSON.stringify(data.user));
                     formSuccess.textContent = 'Login Successful! Redirecting to dashboard...';
                     formSuccess.classList.add('show');
                     
