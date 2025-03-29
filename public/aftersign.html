@@ -238,15 +238,15 @@
     <nav class="fixed top-0 left-0 right-0 z-50 bg-darkbg/80 backdrop-blur-md border-b border-gray-800">
         <div class="container mx-auto px-4 py-3">
             <div class="flex justify-between items-center">
-                <a href="#" class="text-white font-bold text-xl flex items-center">
+                <div onclick="location.reload()" class="text-white font-bold text-xl flex items-center cursor-pointer">
                     <span class="bg-gradient-to-r from-student to-startup text-transparent bg-clip-text">PeerSphere</span>
-                </a>
+                </div>
                 
                 <!-- Avatar with Dropdown -->
                 <div class="relative" id="avatar-dropdown">
                     <button class="flex items-center focus:outline-none" id="avatar-button">
                         <div class="avatar-ring">
-                            <img src="avtar.png" alt="User Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-darkbg">
+                            <img src="/avtar.png" alt="User Avatar" class="w-10 h-10 rounded-full object-cover border-2 border-darkbg">
                         </div>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -256,8 +256,8 @@
                     <!-- Dropdown Menu -->
                     <div class="dropdown-menu absolute right-0 mt-2 w-48 bg-darkcard rounded-lg shadow-lg border border-gray-700 overflow-hidden z-50" id="dropdown-menu">
                         <div class="p-3 border-b border-gray-700">
-                            <p class="text-sm font-medium text-white">John Doe</p>
-                            <p class="text-xs text-gray-400">john.doe@example.com</p>
+                            <p id="userName" class="text-sm font-medium text-white"></p>
+                            <p id="userEmail" class="text-xs text-gray-400">john.doe@example.com</p>
                         </div>
                         <div class="py-1">
                             <a href="profile.html" class="dropdown-item flex items-center px-4 py-2 text-sm text-gray-300 hover:text-white">
@@ -552,6 +552,19 @@
 
     <!-- JavaScript for animated particles and dropdown -->
     <script>
+        //for profile name display(till 566line)
+        document.addEventListener("DOMContentLoaded", function () {
+    const user = JSON.parse(sessionStorage.getItem("user")); // Retrieve user details
+
+    if (user) {
+        document.getElementById("userName").textContent = user.fullName;
+        document.getElementById("userEmail").textContent = user.email;
+    } else {
+        document.getElementById("userName").textContent = "Guest";
+        document.getElementById("userEmail").textContent = "Not available";
+    }
+});
+
         document.addEventListener('DOMContentLoaded', function() {
             // Particles animation
             const particlesContainer = document.getElementById('particles');
