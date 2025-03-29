@@ -95,6 +95,13 @@ app.post("/login", async (req, res) => {
     if (!user) {
       return res.status(400).json({ error: "Invalid email or passwor`d" })
     }
+
+    //for updating profile name
+    res.json({ 
+      message: "Login successful",
+      user: { fullName: user.fullName, email: user.email } 
+  });
+
 ``
     // Compare passwords
     const isMatch = await bcrypt.compare(password, user.password)
@@ -104,7 +111,7 @@ app.post("/login", async (req, res) => {
 
     // Login successful
     console.log("User logged in successfully:", email)
-    res.status(200).json({ success: true, message: "Login successful" })
+    // res.status(200).json({ success: true, message: "Login successful" })
   } catch (error) {
     console.error("Login error:", error)
     res.status(500).json({ error: "Server error, please try again" })
