@@ -7,7 +7,6 @@ const User = require("./models/userModel")
 
 const app = express()
 const PORT = 3000
-amit
 // Add this debugging middleware at the top of your middleware section
 // to log all incoming requests
 
