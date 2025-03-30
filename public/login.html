@@ -337,6 +337,8 @@
     </div>
 
     <script>
+        const API_BASE_URL = "https://peersphere-microsoft-1.onrender.com"; // Your backend URL
+
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
             
@@ -353,7 +355,7 @@
                 const formError = document.getElementById('formError');
                 const formSuccess = document.getElementById('formSuccess');
                 
-                const response = await fetch('/login', {
+                const response = await fetch(`${API_BASE_URL}/login`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ email, password })

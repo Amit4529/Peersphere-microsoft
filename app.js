@@ -4,6 +4,7 @@ require("dotenv").config();
 const bcrypt = require("bcryptjs")
 const path = require("path")
 const User = require("./models/userModel")
+const API_BASE_URL = "https://peersphere-microsoft-1.onrender.com"; // Your backend URL
 
 const app = express()
 const PORT = 3000
