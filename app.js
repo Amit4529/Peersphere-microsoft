@@ -87,36 +87,33 @@ app.post("/signup", async (req, res) => {
 // Login Route
 app.post("/login", async (req, res) => {
   try {
-    console.log("Login request received:", req.body)
-    const { email, password } = req.body
+    console.log("Login request received:", req.body);
+    const { email, password } = req.body;
 
     // Find user by email
-    const user = await User.findOne({ email })
+    const user = await User.findOne({ email });
     if (!user) {
-      return res.status(400).json({ error: "Invalid email or passwor`d" })
+      return res.status(400).json({ error: "Invalid email or password" });
     }
 
-    //for updating profile name
-    res.json({ 
-      message: "Login successful",
-      user: { fullName: user.fullName, email: user.email } 
-  });
-
-``
     // Compare passwords
-    const isMatch = await bcrypt.compare(password, user.password)
+    const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
-      return res.status(400).json({ error: "Invalid email or password" })
+      return res.status(400).json({ error: "Invalid email or password" });
     }
 
-    // Login successful
-    console.log("User logged in successfully:", email)
-    // res.status(200).json({ success: true, message: "Login successful" })
+    // ✅ Now send the response after password check
+    console.log("User logged in successfully:", email);
+    return res.json({
+      message: "Login successful",
+      user: { fullName: user.fullName, email: user.email },
+    });
+
   } catch (error) {
-    console.error("Login error:", error)
-    res.status(500).json({ error: "Server error, please try again" })
+    console.error("Login error:", error);
+    return res.status(500).json({ error: "Server error, please try again" });
   }
-})
+});
 
 // Serve HTML pages
 

@@ -502,33 +502,47 @@
         // Load user data from localStorage
         function loadUserData() {
             const userData = JSON.parse(localStorage.getItem('userData')) || {};
+
+            //For name and email 
+            document.addEventListener("DOMContentLoaded", function () {
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve user details
+
+    if (user) {
+        document.getElementById('display-name').textContent = user.name;
+        document.getElementById('display-email').textContent = user.email;
+        document.getElementById('display-fullname').textContent = user.fullName;
+    } else {
+        document.getElementById("userName").textContent = "Guest";
+        document.getElementById("userEmail").textContent = "Not available";
+    }
+});
             
             // Only update if data exists
             if (Object.keys(userData).length > 0) {
                 // Personal Information
-                document.getElementById('display-name').textContent = userData.name || 'Alex Johnson';
-                document.getElementById('display-username').textContent = '@' + (userData.username || 'alexjohnson');
-                document.getElementById('display-fullname').textContent = userData.fullName || 'Alexander Johnson';
-                document.getElementById('display-email').textContent = userData.email || 'alex.johnson@example.com';
-                document.getElementById('display-phone').textContent = userData.phone || '(555) 123-4567';
-                document.getElementById('display-dob').textContent = userData.dob || 'June 15, 1998';
-                document.getElementById('display-bio').textContent = userData.bio || 'Passionate developer with a focus on creating intuitive and accessible web applications. I love learning new technologies and contributing to open-source projects in my free time.';
-                document.getElementById('display-role').textContent = userData.role || 'Full Stack Developer';
-                document.getElementById('display-location').textContent = userData.location || 'San Francisco, CA';
+                // document.getElementById('display-name').textContent = userData.name || 'Needs to be filled';
+                document.getElementById('display-username').textContent = '@' + (userData.username || 'Needs to be filled');
+                // document.getElementById('display-fullname').textContent = userData.fullName || 'Needs to be filled';
+                // document.getElementById('display-email').textContent = userData.email || 'Needs to be filled';
+                document.getElementById('display-phone').textContent = userData.phone || 'Needs to be filled';
+                document.getElementById('display-dob').textContent = userData.dob || 'Needs to be filled';
+                document.getElementById('display-bio').textContent = userData.bio || 'Needs to be filled';
+                document.getElementById('display-role').textContent = userData.role || 'Needs to be filled';
+                document.getElementById('display-location').textContent = userData.location || 'Needs to be filled';
                 
                 // Education
-                document.getElementById('display-college').textContent = userData.college || 'Stanford University';
-                document.getElementById('display-degree').textContent = userData.degree || 'Bachelor of Science';
-                document.getElementById('display-branch').textContent = userData.branch || 'Computer Science';
-                document.getElementById('display-year-study').textContent = userData.yearOfStudy || '4th Year';
-                document.getElementById('display-graduation').textContent = userData.graduation || 'May 2024';
-                document.getElementById('display-year').textContent = userData.year || 'Final Year';
+                document.getElementById('display-college').textContent = userData.college || 'Needs to be filled';
+                document.getElementById('display-degree').textContent = userData.degree || 'Needs to be filled';
+                document.getElementById('display-branch').textContent = userData.branch || 'Needs to be filled';
+                document.getElementById('display-year-study').textContent = userData.yearOfStudy || 'Needs to be filled';
+                document.getElementById('display-graduation').textContent = userData.graduation || 'Needs to be filled';
+                document.getElementById('display-year').textContent = userData.year || 'Needs to be filled';
                 
                 // Contact information
-                document.getElementById('contact-email').textContent = userData.email || 'alex.johnson@example.com';
-                document.getElementById('contact-phone').textContent = userData.phone || '(555) 123-4567';
-                document.getElementById('contact-github').textContent = userData.github || 'github.com/alexjohnson';
-                document.getElementById('contact-linkedin').textContent = userData.linkedin || 'linkedin.com/in/alexjohnson';
+                document.getElementById('contact-email').textContent = userData.email || 'Needs to be filled';
+                document.getElementById('contact-phone').textContent = userData.phone || 'Needs to be filled';
+                document.getElementById('contact-github').textContent = userData.github || 'Needs to be filled';
+                document.getElementById('contact-linkedin').textContent = userData.linkedin || 'Needs to be filled';
                 
                 // Profile image
                 if (userData.profileImage) {
