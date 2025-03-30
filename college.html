@@ -248,8 +248,8 @@
               </button>
               <div id="avatar-dropdown" class="avatar-dropdown">
                 <div class="p-3 border-b border-gray-700">
-                  <div class="font-medium">User Name</div>
-                  <div class="text-sm text-gray-400">user@example.com</div>
+                  <div id="userName" class="font-medium"></div>
+                  <div id="userEmail" class="text-sm text-gray-400"></div>
                 </div>
               <div class="py-1">
                 <a href="profile.html" class="flex items-center px-4 py-2 text-sm hover:bg-gray-800 transition-colors">
@@ -798,6 +798,18 @@
         avatarDropdown.classList.remove('show');
       }
     });
+           //for profile name display
+           document.addEventListener("DOMContentLoaded", function () {
+    const user = JSON.parse(localStorage.getItem("user")); // Retrieve user details
+
+    if (user) {
+        document.getElementById("userName").textContent = user.fullName;
+        document.getElementById("userEmail").textContent = user.email;
+    } else {
+        document.getElementById("userName").textContent = "Guest";
+        document.getElementById("userEmail").textContent = "Not available";
+    }
+});
 
     // Navigation between sections
     let currentCollege = '';
