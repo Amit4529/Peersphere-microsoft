@@ -6,7 +6,6 @@
     <title>Edit Profile</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <script>
         tailwind.config = {
             theme: {
@@ -17,16 +16,6 @@
                         dark: '#121212',
                         darker: '#0A0A0A',
                         'gray-dark': '#1E1E1E',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        }
                     }
                 }
             }
@@ -45,23 +34,6 @@
             background: linear-gradient(90deg, #6C63FF, #00D9C0);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        
-        .bg-gradient {
-            background: linear-gradient(135deg, rgba(108, 99, 255, 0.1), rgba(0, 217, 192, 0.1));
-        }
-        
-        .animate-float {
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
         }
         
         .profile-img-container {
@@ -88,26 +60,15 @@
             box-shadow: 0 0 30px rgba(108, 99, 255, 0.8);
         }
         
-        .page-transition {
-            animation: fadeIn 0.5s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
+        /* Form styling */
         .form-input {
             background-color: #1E1E1E;
-            border: 1px solid #333;
+            border: 1px solid #444;
             color: white;
             transition: all 0.3s ease;
+            padding: 8px 12px;
+            width: 100%;
+            border-radius: 0.375rem;
         }
         
         .form-input:focus {
@@ -116,13 +77,21 @@
             outline: none;
         }
         
+        .form-input::placeholder {
+            color: #999;
+        }
+        
+        select.form-input {
+            appearance: auto;
+        }
+        
         .tag-input {
             display: flex;
             flex-wrap: wrap;
             gap: 8px;
             padding: 8px;
             background-color: #1E1E1E;
-            border: 1px solid #333;
+            border: 1px solid #444;
             border-radius: 0.375rem;
             min-height: 42px;
         }
@@ -169,8 +138,8 @@
 <body class="bg-dark min-h-screen">
     <!-- Background Elements -->
     <div class="fixed inset-0 overflow-hidden -z-10">
-        <div class="absolute top-20 left-10 w-72 h-72 bg-primary bg-opacity-10 rounded-full filter blur-3xl animate-pulse-slow"></div>
-        <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary bg-opacity-10 rounded-full filter blur-3xl animate-pulse-slow" style="animation-delay: 1s;"></div>
+        <div class="absolute top-20 left-10 w-72 h-72 bg-primary opacity-10 rounded-full blur-3xl"></div>
+        <div class="absolute bottom-20 right-10 w-80 h-80 bg-secondary opacity-10 rounded-full blur-3xl"></div>
     </div>
 
     <!-- Navigation -->
@@ -206,7 +175,7 @@
     
     <!-- Profile Menu Dropdown (Hidden by default) -->
     <div id="profile-menu" class="hidden absolute right-4 top-16 mt-2 w-48 bg-darker rounded-lg shadow-lg py-2 z-50">
-        <a href="index.html" class="block px-4 py-2 text-white hover:bg-gray-dark transition-colors duration-300">
+        <a href="profile.html" class="block px-4 py-2 text-white hover:bg-gray-dark transition-colors duration-300">
             <i class="fas fa-user mr-2"></i> My Profile
         </a>
         <a href="#" class="block px-4 py-2 text-white hover:bg-gray-dark transition-colors duration-300">
@@ -230,7 +199,7 @@
     </div>
 
     <!-- Main Content -->
-    <main class="container mx-auto px-4 md:px-6 pt-24 pb-12 page-transition">
+    <main class="container mx-auto px-4 md:px-6 pt-24 pb-12">
         <div class="max-w-4xl mx-auto">
             <div class="flex justify-between items-center mb-8">
                 <h1 class="text-3xl font-bold">Edit Profile</h1>
@@ -241,7 +210,7 @@
             
             <form id="profile-form" class="space-y-8">
                 <!-- Profile Image Section -->
-                <div class="bg-darker rounded-xl p-6 shadow-lg" data-aos="fade-up">
+                <div class="bg-darker rounded-xl p-6 shadow-lg">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
                         <i class="fas fa-image text-primary mr-3"></i> Profile Image
                     </h2>
@@ -273,7 +242,7 @@
                 </div>
                 
                 <!-- Personal Information -->
-                <div class="bg-darker rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="100">
+                <div class="bg-darker rounded-xl p-6 shadow-lg">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
                         <i class="fas fa-user-circle text-primary mr-3"></i> Personal Information
                     </h2>
@@ -281,13 +250,13 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="name" class="block text-gray-300 mb-2">Display Name</label>
-                            <input type="text" id="name" name="name" class="w-full px-4 py-2 rounded-lg form-input" placeholder="Display Name">
+                            <input type="text" id="name" name="name" class="form-input" placeholder="Display Name">
                         </div>
                         <div>
                             <label for="username" class="block text-gray-300 mb-2">Username</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-2 text-gray-500">@</span>
-                                <input type="text" id="username" name="username" class="w-full pl-8 pr-4 py-2 rounded-lg form-input" placeholder="username">
+                                <input type="text" id="username" name="username" class="form-input pl-8" placeholder="username">
                             </div>
                         </div>
                     </div>
@@ -295,68 +264,68 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="fullName" class="block text-gray-300 mb-2">Full Name</label>
-                            <input type="text" id="fullName" name="fullName" class="w-full px-4 py-2 rounded-lg form-input" placeholder="Full Name">
+                            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="Full Name">
                         </div>
                         <div>
                             <label for="email" class="block text-gray-300 mb-2">Email</label>
-                            <input type="email" id="email" name="email" class="w-full px-4 py-2 rounded-lg form-input" placeholder="Email">
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Email">
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="phone" class="block text-gray-300 mb-2">Phone</label>
-                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-2 rounded-lg form-input" placeholder="Phone">
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="Phone">
                         </div>
                         <div>
                             <label for="dob" class="block text-gray-300 mb-2">Date of Birth</label>
-                            <input type="date" id="dob" name="dob" class="w-full px-4 py-2 rounded-lg form-input">
+                            <input type="date" id="dob" name="dob" class="form-input">
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="role" class="block text-gray-300 mb-2">Role/Title</label>
-                            <input type="text" id="role" name="role" class="w-full px-4 py-2 rounded-lg form-input" placeholder="e.g. Full Stack Developer">
+                            <input type="text" id="role" name="role" class="form-input" placeholder="e.g. Full Stack Developer">
                         </div>
                         <div>
                             <label for="location" class="block text-gray-300 mb-2">Location</label>
-                            <input type="text" id="location" name="location" class="w-full px-4 py-2 rounded-lg form-input" placeholder="City, Country">
+                            <input type="text" id="location" name="location" class="form-input" placeholder="City, Country">
                         </div>
                     </div>
                     
                     <div>
                         <label for="bio" class="block text-gray-300 mb-2">Bio</label>
-                        <textarea id="bio" name="bio" rows="4" class="w-full px-4 py-2 rounded-lg form-input" placeholder="Tell us about yourself..."></textarea>
+                        <textarea id="bio" name="bio" rows="4" class="form-input" placeholder="Tell us about yourself..."></textarea>
                     </div>
                 </div>
                 
                 <!-- Education -->
-                <div class="bg-darker rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="200">
+                <div class="bg-darker rounded-xl p-6 shadow-lg">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
                         <i class="fas fa-graduation-cap text-primary mr-3"></i> Education
                     </h2>
                     
                     <div class="mb-6">
                         <label for="college" class="block text-gray-300 mb-2">College/University</label>
-                        <input type="text" id="college" name="college" class="w-full px-4 py-2 rounded-lg form-input" placeholder="College/University">
+                        <input type="text" id="college" name="college" class="form-input" placeholder="College/University">
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                         <div>
                             <label for="degree" class="block text-gray-300 mb-2">Degree</label>
-                            <input type="text" id="degree" name="degree" class="w-full px-4 py-2 rounded-lg form-input" placeholder="e.g. Bachelor of Science">
+                            <input type="text" id="degree" name="degree" class="form-input" placeholder="e.g. Bachelor of Science">
                         </div>
                         <div>
                             <label for="branch" class="block text-gray-300 mb-2">Branch/Major</label>
-                            <input type="text" id="branch" name="branch" class="w-full px-4 py-2 rounded-lg form-input" placeholder="e.g. Computer Science">
+                            <input type="text" id="branch" name="branch" class="form-input" placeholder="e.g. Computer Science">
                         </div>
                     </div>
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <label for="yearOfStudy" class="block text-gray-300 mb-2">Year of Study</label>
-                            <select id="yearOfStudy" name="yearOfStudy" class="w-full px-4 py-2 rounded-lg form-input">
+                            <select id="yearOfStudy" name="yearOfStudy" class="form-input">
                                 <option value="">Select Year</option>
                                 <option value="1st Year">1st Year</option>
                                 <option value="2nd Year">2nd Year</option>
@@ -369,13 +338,13 @@
                         </div>
                         <div>
                             <label for="graduation" class="block text-gray-300 mb-2">Expected Graduation</label>
-                            <input type="text" id="graduation" name="graduation" class="w-full px-4 py-2 rounded-lg form-input" placeholder="e.g. May 2024">
+                            <input type="text" id="graduation" name="graduation" class="form-input" placeholder="e.g. May 2024">
                         </div>
                     </div>
                 </div>
                 
                 <!-- Skills -->
-                <div class="bg-darker rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="300">
+                <div class="bg-darker rounded-xl p-6 shadow-lg">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
                         <i class="fas fa-code text-primary mr-3"></i> Skills
                     </h2>
@@ -406,7 +375,7 @@
                 </div>
                 
                 <!-- Social Links -->
-                <div class="bg-darker rounded-xl p-6 shadow-lg" data-aos="fade-up" data-aos-delay="400">
+                <div class="bg-darker rounded-xl p-6 shadow-lg">
                     <h2 class="text-2xl font-bold mb-6 flex items-center">
                         <i class="fas fa-link text-primary mr-3"></i> Social Links
                     </h2>
@@ -416,14 +385,14 @@
                             <label for="github" class="block text-gray-300 mb-2">GitHub</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-2 text-gray-500"><i class="fab fa-github"></i></span>
-                                <input type="text" id="github" name="github" class="w-full pl-10 pr-4 py-2 rounded-lg form-input" placeholder="github.com/username">
+                                <input type="text" id="github" name="github" class="form-input pl-10" placeholder="github.com/username">
                             </div>
                         </div>
                         <div>
                             <label for="linkedin" class="block text-gray-300 mb-2">LinkedIn</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-2 text-gray-500"><i class="fab fa-linkedin"></i></span>
-                                <input type="text" id="linkedin" name="linkedin" class="w-full pl-10 pr-4 py-2 rounded-lg form-input" placeholder="linkedin.com/in/username">
+                                <input type="text" id="linkedin" name="linkedin" class="form-input pl-10" placeholder="linkedin.com/in/username">
                             </div>
                         </div>
                     </div>
@@ -433,14 +402,14 @@
                             <label for="twitter" class="block text-gray-300 mb-2">Twitter</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-2 text-gray-500"><i class="fab fa-twitter"></i></span>
-                                <input type="text" id="twitter" name="twitter" class="w-full pl-10 pr-4 py-2 rounded-lg form-input" placeholder="twitter.com/username">
+                                <input type="text" id="twitter" name="twitter" class="form-input pl-10" placeholder="twitter.com/username">
                             </div>
                         </div>
                         <div>
                             <label for="website" class="block text-gray-300 mb-2">Personal Website</label>
                             <div class="relative">
                                 <span class="absolute left-4 top-2 text-gray-500"><i class="fas fa-globe"></i></span>
-                                <input type="text" id="website" name="website" class="w-full pl-10 pr-4 py-2 rounded-lg form-input" placeholder="https://yourwebsite.com">
+                                <input type="text" id="website" name="website" class="form-input pl-10" placeholder="https://yourwebsite.com">
                             </div>
                         </div>
                     </div>
@@ -448,11 +417,11 @@
                 
                 <!-- Form Actions -->
                 <div class="flex justify-end space-x-4">
-                    <a href="index.html" class="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-all duration-300">
+                    <a href="profile.html" class="bg-gray-700 text-white px-6 py-3 rounded-lg hover:bg-gray-600 transition-all duration-300">
                         Cancel
                     </a>
                     <button type="submit" class="bg-primary text-white px-8 py-3 rounded-lg hover:shadow-lg hover:shadow-primary/30 transition-all duration-300 glow">
-                       <a href="profile.html"> <i class="fas fa-save mr-2"></i> Save Changes </a>
+                        <i class="fas fa-save mr-2"></i> Save Changes
                     </button>
                 </div>
             </form>
@@ -497,16 +466,9 @@
     </footer>
     
     <!-- Scripts -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        // Initialize AOS animation library
-        AOS.init({
-            duration: 800,
-            once: false,
-        });
-        
-        // Profile Menu Toggle
         document.addEventListener('DOMContentLoaded', function() {
+            // Profile Menu Toggle
             const profileMenuTrigger = document.getElementById('profile-menu-trigger');
             const profileMenu = document.getElementById('profile-menu');
             
@@ -541,55 +503,52 @@
             const userData = JSON.parse(localStorage.getItem('userData')) || {};
             
             // Only populate if data exists
-            if (Object.keys(userData).length > 0) {
-                // Personal Information
-                document.getElementById('name').value = userData.name || '';
-                document.getElementById('username').value = userData.username || '';
-                document.getElementById('fullName').value = userData.fullName || '';
-                document.getElementById('email').value = userData.email || '';
-                document.getElementById('phone').value = userData.phone || '';
-                document.getElementById('dob').value = userData.dob || '';
-                document.getElementById('bio').value = userData.bio || '';
-                document.getElementById('role').value = userData.role || '';
-                document.getElementById('location').value = userData.location || '';
-                
-                // Education
-                document.getElementById('college').value = userData.college || '';
-                document.getElementById('degree').value = userData.degree || '';
-                document.getElementById('branch').value = userData.branch || '';
-                document.getElementById('yearOfStudy').value = userData.yearOfStudy || '';
-                document.getElementById('graduation').value = userData.graduation || '';
-                
-                // Social Links
-                document.getElementById('github').value = userData.github || '';
-                document.getElementById('linkedin').value = userData.linkedin || '';
-                document.getElementById('twitter').value = userData.twitter || '';
-                document.getElementById('website').value = userData.website || '';
-                
-                // Profile image
-                if (userData.profileImage) {
-                    document.getElementById('profile-image-preview').src = userData.profileImage;
-                    document.getElementById('nav-profile-image').src = userData.profileImage;
-                }
-                
-                // Skills - populate tags
-                if (userData.languages) {
-                    userData.languages.forEach(lang => {
-                        addTag(lang, 'languages-container');
-                    });
-                }
-                
-                if (userData.frameworks) {
-                    userData.frameworks.forEach(framework => {
-                        addTag(framework, 'frameworks-container');
-                    });
-                }
-                
-                if (userData.tools) {
-                    userData.tools.forEach(tool => {
-                        addTag(tool, 'tools-container');
-                    });
-                }
+            if (userData.name) document.getElementById('name').value = userData.name;
+            if (userData.username) document.getElementById('username').value = userData.username;
+            if (userData.fullName) document.getElementById('fullName').value = userData.fullName;
+            if (userData.email) document.getElementById('email').value = userData.email;
+            if (userData.phone) document.getElementById('phone').value = userData.phone;
+            if (userData.dob) document.getElementById('dob').value = userData.dob;
+            if (userData.bio) document.getElementById('bio').value = userData.bio;
+            if (userData.role) document.getElementById('role').value = userData.role;
+            if (userData.location) document.getElementById('location').value = userData.location;
+            
+            // Education
+            if (userData.college) document.getElementById('college').value = userData.college;
+            if (userData.degree) document.getElementById('degree').value = userData.degree;
+            if (userData.branch) document.getElementById('branch').value = userData.branch;
+            if (userData.yearOfStudy) document.getElementById('yearOfStudy').value = userData.yearOfStudy;
+            if (userData.graduation) document.getElementById('graduation').value = userData.graduation;
+            
+            // Social links
+            if (userData.github) document.getElementById('github').value = userData.github;
+            if (userData.linkedin) document.getElementById('linkedin').value = userData.linkedin;
+            if (userData.twitter) document.getElementById('twitter').value = userData.twitter;
+            if (userData.website) document.getElementById('website').value = userData.website;
+            
+            // Profile image
+            if (userData.profileImage) {
+                document.getElementById('profile-image-preview').src = userData.profileImage;
+                document.getElementById('nav-profile-image').src = userData.profileImage;
+            }
+            
+            // Skills - populate tags
+            if (userData.languages && userData.languages.length > 0) {
+                userData.languages.forEach(lang => {
+                    addTag(lang, 'languages-container');
+                });
+            }
+            
+            if (userData.frameworks && userData.frameworks.length > 0) {
+                userData.frameworks.forEach(framework => {
+                    addTag(framework, 'frameworks-container');
+                });
+            }
+            
+            if (userData.tools && userData.tools.length > 0) {
+                userData.tools.forEach(tool => {
+                    addTag(tool, 'tools-container');
+                });
             }
         }
         
@@ -639,14 +598,13 @@
             // Show success message
             const successMessage = document.getElementById('success-message');
             successMessage.classList.remove('hidden');
-            successMessage.classList.add('success-animation');
             
-            // Hide success message after 3 seconds
+            // Hide success message after 2 seconds
             setTimeout(() => {
                 successMessage.classList.add('hidden');
                 
                 // Redirect to profile page
-                window.location.href = 'index.html';
+                window.location.href = 'profile.html';
             }, 2000);
         }
         
