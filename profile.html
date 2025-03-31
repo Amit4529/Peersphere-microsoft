@@ -501,26 +501,20 @@
         
         // Load user data from localStorage
         function loadUserData() {
-            const userData = JSON.parse(localStorage.getItem("userData")) || {};
-
+            ;
+const userData = JSON.parse(localStorage.getItem("userData")) || {}
             //For name and email 
     const user = JSON.parse(localStorage.getItem("user") || {}); // Retrieve user details
 
-    if (user) {
-        document.getElementById('display-name').textContent = user.fullName;
-        document.getElementById('display-email').textContent = user.email;
-        document.getElementById('display-username').textContent = user.username;
-        document.getElementById('display-fullname').textContent = user.username;
-    } else {
-        document.getElementById("display-name").textContent = "Guest";
-        document.getElementById("display-email").textContent = "Not available";
-        document.getElementById('display-username').textContent = "Not available";
-        document.getElementById('display-fullname').textContent = "Not available";
-    }
-;
+    document.getElementById('display-name').textContent = user.fullName || 'Guest';
+    document.getElementById('display-email').textContent = user.email || 'Not available';
+    document.getElementById('display-username').textContent = user.username || 'Not available';
+    document.getElementById('display-fullname').textContent = user.username || 'Not available';
+
+
             
             //retrive
-            if (userData && Object.keys(userData).length >= 0) {
+            if (userData && Object.keys(userData).length > 0) {
                 // Personal Information
                 // document.getElementById('display-name').textContent = userData.name || 'Needs to be filled';
                 // document.getElementById('display-username').textContent = '@' + (userData.username || 'Needs to be filled');
