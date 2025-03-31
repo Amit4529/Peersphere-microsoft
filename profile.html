@@ -494,24 +494,26 @@
                     profileMenu.classList.add('hidden');
                 }
             });
-            
+            loaduser();
             // Load user data from localStorage if available
             loadUserData();
         });
-        
+        function loaduser(){
+            const user = JSON.parse(localStorage.getItem("user") || {}); // Retrieve user details
+   
+
+   document.getElementById('display-name').textContent = user.fullName || 'Guest';
+   document.getElementById('display-email').textContent = user.email || 'Not available';
+   document.getElementById('display-username').textContent = user.username || 'Not available';
+   document.getElementById('display-fullname').textContent = user.fullName || 'Not available';
+            
+        }
         // Load user data from localStorage
         function loadUserData() {
-            ;
-const userData = JSON.parse(localStorage.getItem("userData")) || {}
-            //For name and email 
-    const user = JSON.parse(localStorage.getItem("user") || {}); // Retrieve user details
+        //For name and email 
+   
 
-    document.getElementById('display-name').textContent = user.fullName || 'Guest';
-    document.getElementById('display-email').textContent = user.email || 'Not available';
-    document.getElementById('display-username').textContent = user.username || 'Not available';
-    document.getElementById('display-fullname').textContent = user.username || 'Not available';
-
-
+    const userData = JSON.parse(localStorage.getItem("userData")) || {}
             
             //retrive
             if (userData && Object.keys(userData).length > 0) {
