@@ -495,13 +495,41 @@
 
                     console.log('Server response:', response.status, data);
 
+                    // if (response.ok) {
+                    //     formSuccess.textContent = 'Signup Successful! Redirecting to login...';
+                    //     formSuccess.classList.add('show');
+                        
+                    //     // Clear form
+                    //     document.getElementById('signupForm').reset();
+                        
+                    //     // Redirect after a short delay
+                    //     setTimeout(() => {
+                    //         window.location.href = 'login.html';
+                    //     }, 2000);
+                    // } else {
+                    //     formError.textContent = data.error || 'Signup failed. Please try again.';
+                    //     formError.classList.add('show');
+                    // }
                     if (response.ok) {
+                        // Retrieve input values (change these IDs to match your form)
+                        const input1 = document.getElementById('fullName').value;
+                        const input2 = document.getElementById('username').value;
+                        const input3 = document.getElementById('email').value;
+
+                        // Store user data along with the new inputs
+                        localStorage.setItem("user", JSON.stringify({
+                            ...data.user,
+                            fullName: input1,
+                            username: input2,
+                            email: input3,
+                        }));
+
                         formSuccess.textContent = 'Signup Successful! Redirecting to login...';
                         formSuccess.classList.add('show');
-                        
+
                         // Clear form
                         document.getElementById('signupForm').reset();
-                        
+
                         // Redirect after a short delay
                         setTimeout(() => {
                             window.location.href = 'login.html';
@@ -510,6 +538,7 @@
                         formError.textContent = data.error || 'Signup failed. Please try again.';
                         formError.classList.add('show');
                     }
+
                 } catch (error) {
                     console.error('Signup error details:', error);
                     const formError = document.getElementById('formError');

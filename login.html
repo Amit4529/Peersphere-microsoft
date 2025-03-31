@@ -364,8 +364,8 @@
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Store user data in sessionStorage(only one line after this)
-                    localStorage.setItem("user", JSON.stringify(data.user));
+                    // Store user data in localstorage(only one line after this)
+                    // localStorage.setItem("user", JSON.stringify(data.user));
                     formSuccess.textContent = 'Login Successful! Redirecting to dashboard...';
                     formSuccess.classList.add('show');
                     
@@ -388,5 +388,3 @@
     </script>
 </body>
 </html>
-
-hello
